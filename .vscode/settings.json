@@ -1,11 +1,11 @@
 {
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
-    "java.project.resourcePaths": ["resources"],
+    "java.project.resourcePaths": ["resources", "web"],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\Nelly Johana\\Downloads\\hibernate-core-6.4.4.Final.jar",
-        "c:\\Users\\Nelly Johana\\Downloads\\jakarta.persistence-api-3.1.0.jar"
-    
+        "c:\\Users\\Nelly Johana\\Downloads\\jakarta.persistence-api-3.1.0.jar",
+        "c:\\Users\\Nelly Johana\\Downloads\\hibernate-core-7.1.3.Final.jar"
     ]
 }

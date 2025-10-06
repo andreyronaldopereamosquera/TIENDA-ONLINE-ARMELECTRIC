@@ -1,0 +1,36 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.transaction-api-2.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.enterprise.cdi-api-4.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-classic-1.5.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-core-6.4.4.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-core-7.1.3.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.15.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jboss-logging-3.5.3.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-core-6.2.7.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javassist-3.28.0-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/byte-buddy-1.14.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dom4j-2.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/classindex-3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/byte-buddy-agent-1.14.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/classmate-1.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-api-2.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.15.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-commons-annotations-7.0.3.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.persistence-api-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.15.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-4.13.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.enterprise.cdi-api-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/antlr4-runtime-4.11.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-simple-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-j-8.0.33.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

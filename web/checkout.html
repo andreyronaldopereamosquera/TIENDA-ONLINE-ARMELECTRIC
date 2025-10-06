@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #F8F9FA; }
+        .header { background: linear-gradient(135deg, #007BFF, #0056B3); color: white; padding: 1rem 0; }
+        .progress { height: 10px; background: #E9ECEF; }
+        .form-control:focus { border-color: #007BFF; box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25); }
+        .btn-pay { background: linear-gradient(135deg, #28A745, #20C997); border: none; color: white; }
+        .total-section { background: #F8F9FA; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <header class="header text-center">
+        <h1><i class="fas fa-credit-card"></i> Checkout</h1>
+        <a href="carrito.html" class="btn btn-light">Volver al Carrito</a>
+    </header>
+    
+    <div class="container my-5">
+        <div class="progress mb-4">
+            <div class="progress-bar bg-success" style="width: 50%;"></div>  <!-- Progreso visual -->
+        </div>
+
+        <!-- Sección de Total y Cotización -->
+      <div class="total-section">
+    <h4>Total Cotización: <span id="total-display">100 USD</span></h4>
+    <form id="currencyForm" class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label for="moneda" class="form-label">Selecciona Moneda:</label>
+            <select id="moneda" name="moneda" class="form-select">
+                <option value="USD">USD (Dólares)</option>
+                <option value="EUR">EUR (Euros)</option>
+                <option value="MXN">MXN (Pesos Mexicanos)</option>
+                <option value="COP">COP (Pesos Colombianos)</option>
+            </select>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+            <button type="button" class="btn btn-info" onclick="updateTotal()">Cotizar Precio</button>
+        </div>
+    </form>
+    <small class="text-muted">Cotización basada en tasas fijas. Actualízala para ver el valor en la moneda seleccionada.</small>
+</div>
+
+        <!-- Formulario de Checkout -->
+        <form id="checkoutForm" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="address" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Tarjeta de Crédito</label>
+                <input type="text" class="form-control" id="card" placeholder="1234 5678 9012 3456" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Expiración</label>
+                <input type="month" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-control" maxlength="3" required>
+            </div>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-pay btn-lg"><i class="fas fa-lock"></i> Pagar Ahora</button>
+            </div>
+        </form>
+        
+        <div id="loading" class="text-center mt-3" style="display:none;">
+            <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:#007BFF;"></i> Procesando...
+        </div>
+    </div>
+
+    <script>
+        // Tasas de cambio fijas (base: USD)
+        const exchangeRates = {
+            USD: 1,
+            EUR: 0.92,
+            MXN: 18.50,
+            COP: 4100.00
+        };
+
+        // Obtener total base en USD desde localStorage (ejemplo: del carrito)
+        let baseTotalUSD = parseFloat(localStorage.getItem('cartTotal')) || 50.00; // Default $50 si no hay
+
+        // Función para actualizar el total en la moneda seleccionada
+        function updateTotal() {
+            const moneda = document.getElementById('moneda').value;
+            const rate = exchangeRates[moneda];
+            const convertedTotal = (baseTotalUSD * rate).toFixed(2);
+            let symbol = '';
+            switch(moneda) {
+                case 'USD': symbol = '$'; break;
+                case 'EUR': symbol = '€'; break;
+                case 'MXN': symbol = '$'; break;
+                case 'COP': symbol = '$'; break;
+            }
+            document.getElementById('total-display').textContent = `${moneda} ${symbol}${convertedTotal}`;
+            localStorage.setItem('selectedCurrency', moneda); // Guardar para uso posterior
+            localStorage.setItem('displayedTotal', convertedTotal); // Guardar total convertido
+        }
+
+        // Inicializar total al cargar la página (default USD)
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCurrency = localStorage.getItem('selectedCurrency') || 'USD';
+            document.getElementById('moneda').value = savedCurrency;
+            updateTotal();
+        });
+
+        // Event listener para cambio de moneda (actualiza en tiempo real)
+        document.getElementById('moneda').addEventListener('change', updateTotal);
+
+        // Submit del formulario de checkout
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (this.checkValidity()) {
+                document.getElementById('loading').style.display = 'block';
+                // Simula delay y guarda datos (incluye total y moneda)
+                setTimeout(() => {
+                    const orderData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        address: document.getElementById('address').value,
+                        total: localStorage.getItem('displayedTotal'),
+                        currency: localStorage.getItem('selectedCurrency')
+                    };
+                    localStorage.setItem('orderData', JSON.stringify(orderData));
+                    window.location.href = 'confirmacion.html';
+                }, 2000);
+            } else {
+                alert('Por favor, completa todos los campos.');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

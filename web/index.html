@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Armelectric</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #F8F9FA; color: #333; }
+        .header { background: linear-gradient(135deg, #007BFF, #0056B3); color: white; padding: 1rem 0; }
+        .product-card { transition: transform 0.3s, box-shadow 0.3s; border: none; }
+        .product-card:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,123,255,0.3); }
+        .btn-add { background-color: #28A745; border: none; }
+        .btn-add:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <header class="header text-center">
+        <h1><i class="fas fa-store"></i> Tienda Armelectric </h1>
+        <a href="carrito.html" class="btn btn-light"><i class="fas fa-shopping-cart"></i> Ver Carrito</a>
+    </header>
+    
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Catálogo de Productos</h2>
+        <div class="row">
+            <!-- Producto 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="https://via.placeholder.com/300x200?text=Producto+1" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Producto 1</h5>
+                        <p class="card-text">$19.99</p>
+                        <button class="btn btn-add w-100" onclick="addToCart('Producto 1', 19.99)">
+                            <i class="fas fa-cart-plus"></i> Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 2 (similar, repite para más) -->
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="https://via.placeholder.com/300x200?text=Producto+2" class="card-img-top" alt="Producto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Producto 2</h5>
+                        <p class="card-text">$29.99</p>
+                        <button class="btn btn-add w-100" onclick="addToCart('Producto 2', 29.99)">
+                            <i class="fas fa-cart-plus"></i> Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Agrega más cards según necesites -->
+        </div>
+    </div>
+
+    <script>
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({name, price, quantity: 1});
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('¡Producto añadido!');  // Popup interactivo
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
